@@ -1,0 +1,24 @@
+{
+  "author": {
+    "email": "satyajit.happy@gmail.com",
+    "name": "Satyajit Sahoo"
+  },
+  "bugs": {
+    "url": "https://github.com/satya164/react-native-image-chooser/issues"
+  },
+  "description": "A react-native wrapper for sharing content.",
+  "homepage": "https://github.com/satya164/react-native-image-chooser#readme",
+  "keywords": [
+    "android",
+    "react",
+    "react-native",
+    "image",
+    "chooser"
+  ],
+  "name": "react-native-image-chooser",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/satya164/react-native-image-chooser.git"
+  },
+  "version": "0.1.0"
+}
