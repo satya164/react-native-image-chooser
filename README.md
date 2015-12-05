@@ -10,10 +10,11 @@ npm i --save react-native-image-chooser
 
 ### Add it to your android project
 
-In `android/setting.gradle`
+In `android/settings.gradle`
 
 ```gradle
 ...
+
 include ':react-native-image-chooser'
 project(':react-native-image-chooser').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-chooser/android')
 ```
@@ -22,8 +23,10 @@ In `android/app/build.gradle`
 
 ```gradle
 ...
+
 dependencies {
     ...
+
     compile project(':react-native-image-chooser')
 }
 ```
@@ -37,7 +40,7 @@ import com.imagechooser.ImageChooserPackage;  // <--- import
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
   ......
 
-  private ImageChooserPackage mChoosersPackage = new ImageChooserPackage(this);       // <------ create new instance
+  private ImageChooserPackage mChoosersPackage = new ImageChooserPackage(this); // <------ create new instance
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
       .setBundleAssetName("index.android.bundle")
       .setJSMainModuleName("index.android")
       .addPackage(new MainReactPackage())
-      .addPackage(mChoosersPackage)              // <------ add the package
+      .addPackage(mChoosersPackage) // <------ add the package
       .setUseDeveloperSupport(BuildConfig.DEBUG)
       .setInitialLifecycleState(LifecycleState.RESUMED)
       .build();
@@ -64,7 +67,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
   public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
 
-      mChoosersPackage.handleActivityResult(requestCode, resultCode, data);       // <------ handle activity result
+      mChoosersPackage.handleActivityResult(requestCode, resultCode, data); // <------ handle activity result
   }
 
   ......
@@ -98,7 +101,7 @@ try {
 }
 ```
 
-The data object has the following properties:
+The `pickImage` method returns a `Promise` with data. The data object has the following properties:
 
 ```js
 height: number;
