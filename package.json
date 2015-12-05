@@ -6,7 +6,7 @@
   "bugs": {
     "url": "https://github.com/satya164/react-native-image-chooser/issues"
   },
-  "description": "A react-native wrapper for sharing content.",
+  "description": "A react-native module for showing system image chooser.",
   "homepage": "https://github.com/satya164/react-native-image-chooser#readme",
   "keywords": [
     "android",
