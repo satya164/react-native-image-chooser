@@ -40,7 +40,7 @@ import com.imagechooser.ImageChooserPackage;  // <--- import
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
   ......
 
-  private ImageChooserPackage mChoosersPackage = new ImageChooserPackage(this); // <------ create new instance
+  private ImageChooserPackage mImageChooserPackage = new ImageChooserPackage(this); // <------ create new instance
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
       .setBundleAssetName("index.android.bundle")
       .setJSMainModuleName("index.android")
       .addPackage(new MainReactPackage())
-      .addPackage(mChoosersPackage) // <------ add the package
+      .addPackage(mImageChooserPackage) // <------ add the package
       .setUseDeveloperSupport(BuildConfig.DEBUG)
       .setInitialLifecycleState(LifecycleState.RESUMED)
       .build();
@@ -67,7 +67,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
   public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
 
-      mChoosersPackage.handleActivityResult(requestCode, resultCode, data); // <------ handle activity result
+      mImageChooserPackage.handleActivityResult(requestCode, resultCode, data); // <------ handle activity result
   }
 
   ......

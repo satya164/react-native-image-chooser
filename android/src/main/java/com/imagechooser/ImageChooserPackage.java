@@ -1,6 +1,6 @@
 package com.imagechooser;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 
 import com.facebook.react.ReactPackage;
@@ -15,16 +15,16 @@ import java.util.List;
 
 public class ImageChooserPackage implements ReactPackage {
 
-    private Context mContext;
+    private Activity mCurrentActivity;
     private ImageChooserModule mModuleInstance;
 
-    public ImageChooserPackage(Context activityContext) {
-        mContext = activityContext;
+    public ImageChooserPackage(Activity activity) {
+        mCurrentActivity = activity;
     }
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        mModuleInstance = new ImageChooserModule(reactContext, mContext);
+        mModuleInstance = new ImageChooserModule(reactContext, mCurrentActivity);
 
         return Arrays.<NativeModule>asList(mModuleInstance);
     }
@@ -36,7 +36,7 @@ public class ImageChooserPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.asList();
+        return Collections.emptyList();
     }
 
     public boolean handleActivityResult(final int requestCode, final int resultCode, final Intent data) {
