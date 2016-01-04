@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.support.v4.content.CursorLoader;
 
+import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -19,7 +20,7 @@ import com.facebook.react.bridge.WritableMap;
 import java.io.File;
 
 
-public class ImageChooserModule extends ReactContextBaseJavaModule {
+public class ImageChooserModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private static final int PICK_IMAGE = 3500;
 
@@ -28,6 +29,8 @@ public class ImageChooserModule extends ReactContextBaseJavaModule {
 
     public ImageChooserModule(ReactApplicationContext reactContext, Activity activity) {
         super(reactContext);
+
+        reactContext.addActivityEventListener(this);
 
         mCurrentActivity = activity;
     }
@@ -133,7 +136,7 @@ public class ImageChooserModule extends ReactContextBaseJavaModule {
         }
     }
 
-    public boolean handleActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         if (requestCode == PICK_IMAGE) {
             if (mPickerPromise != null) {
                 if (resultCode == Activity.RESULT_CANCELED) {
@@ -172,10 +175,6 @@ public class ImageChooserModule extends ReactContextBaseJavaModule {
                     }
                 }
             }
-
-            return true;
         }
-
-        return false;
     }
 }

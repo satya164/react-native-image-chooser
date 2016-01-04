@@ -37,37 +37,16 @@ Register module (in `MainActivity.java`)
 import android.content.Intent;  // <--- import
 import com.imagechooser.ImageChooserPackage;  // <--- import
 
-public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+public class MainActivity extends ReactActivity {
+
   ......
 
-  private ImageChooserPackage mImageChooserPackage = new ImageChooserPackage(this); // <------ create new instance
-
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    mReactRootView = new ReactRootView(this);
-
-    mReactInstanceManager = ReactInstanceManager.builder()
-      .setApplication(getApplication())
-      .setBundleAssetName("index.android.bundle")
-      .setJSMainModuleName("index.android")
-      .addPackage(new MainReactPackage())
-      .addPackage(mImageChooserPackage) // <------ add the package
-      .setUseDeveloperSupport(BuildConfig.DEBUG)
-      .setInitialLifecycleState(LifecycleState.RESUMED)
-      .build();
-
-    mReactRootView.startReactApplication(mReactInstanceManager, "ExampleApp", null);
-
-    setContentView(mReactRootView);
-  }
-
-  @Override
-  public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-      super.onActivityResult(requestCode, resultCode, data);
-
-      mImageChooserPackage.handleActivityResult(requestCode, resultCode, data); // <------ handle activity result
+  protected List<ReactPackage> getPackages() {
+    return Arrays.asList(
+      new MainReactPackage(),
+      new ImageChooserPackage(this) // <------ add the package
+    );
   }
 
   ......
