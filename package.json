@@ -1,4 +1,6 @@
 {
+  "name": "react-native-image-chooser",
+  "version": "1.0.0",
   "author": {
     "email": "satyajit.happy@gmail.com",
     "name": "Satyajit Sahoo"
@@ -15,10 +17,8 @@
     "image",
     "chooser"
   ],
-  "name": "react-native-image-chooser",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/satya164/react-native-image-chooser.git"
-  },
-  "version": "0.1.2"
+  }
 }
