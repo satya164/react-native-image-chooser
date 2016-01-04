@@ -24,15 +24,12 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
 
     private static final int PICK_IMAGE = 3500;
 
-    private Activity mCurrentActivity;
     private Promise mPickerPromise;
 
-    public ImageChooserModule(ReactApplicationContext reactContext, Activity activity) {
+    public ImageChooserModule(ReactApplicationContext reactContext) {
         super(reactContext);
 
         reactContext.addActivityEventListener(this);
-
-        mCurrentActivity = activity;
     }
 
     @Override
@@ -59,9 +56,15 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
             return contentUri.getPath();
         }
 
+        Activity currentActivity = getCurrentActivity();
+
+        if (currentActivity == null) {
+            return null;
+        }
+
         String[] projection = {MediaStore.Images.Media.DATA};
 
-        CursorLoader loader = new CursorLoader(mCurrentActivity, contentUri, projection, null, null, null);
+        CursorLoader loader = new CursorLoader(currentActivity, contentUri, projection, null, null, null);
         Cursor cursor = loader.loadInBackground();
 
         try {
@@ -82,9 +85,15 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
             return contentUri.getLastPathSegment();
         }
 
+        Activity currentActivity = getCurrentActivity();
+
+        if (currentActivity == null) {
+            return null;
+        }
+
         String[] projection = {MediaStore.MediaColumns.DISPLAY_NAME};
 
-        Cursor metaCursor = mCurrentActivity.getContentResolver().query(contentUri, projection, null, null, null);
+        Cursor metaCursor = currentActivity.getContentResolver().query(contentUri, projection, null, null, null);
 
         if (metaCursor != null) {
             try {
@@ -104,7 +113,13 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
             return new File(contentUri.getPath()).length();
         }
 
-        Cursor cursor = mCurrentActivity.getContentResolver().query(contentUri, null, null, null, null);
+        Activity currentActivity = getCurrentActivity();
+
+        if (currentActivity == null) {
+            return 0;
+        }
+
+        Cursor cursor = currentActivity.getContentResolver().query(contentUri, null, null, null, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -121,7 +136,14 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
 
     @ReactMethod
     public void pickImage(final Promise promise) {
-        mPickerPromise = promise;
+        Activity currentActivity = getCurrentActivity();
+
+        if (currentActivity != null) {
+            mPickerPromise = promise;
+        } else {
+            promise.reject("Activity doesn't exist");
+            return;
+        }
 
         try {
             final Intent galleryIntent = new Intent(Intent.ACTION_PICK);
@@ -130,7 +152,7 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
 
             final Intent chooserIntent = Intent.createChooser(galleryIntent, "Pick an image");
 
-            mCurrentActivity.startActivityForResult(chooserIntent, PICK_IMAGE);
+            currentActivity.startActivityForResult(chooserIntent, PICK_IMAGE);
         } catch (Exception e) {
             promise.reject(e.getMessage());
         }
