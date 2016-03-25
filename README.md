@@ -34,7 +34,6 @@ dependencies {
 Register module (in `MainActivity.java`)
 
 ```java
-import android.content.Intent;  // <--- import
 import com.imagechooser.ImageChooserPackage;  // <--- import
 
 public class MainActivity extends ReactActivity {
@@ -59,20 +58,14 @@ public class MainActivity extends ReactActivity {
 First import the module as follows:
 
 ```js
-import React from "react-native";
-
-const {
-  NativeModules: {
-    ImageChooserModule
-  }
-} = React;
+import ImageChooser from "react-native-image-chooser";
 ```
 
 To show the chooser, call the `pickImage` method:
 
 ```js
 try {
-  const data = await ImageChooserModule.pickImage();
+  const data = await ImageChooser.pickImage();
 
   // do something with the data
 } catch (err) {

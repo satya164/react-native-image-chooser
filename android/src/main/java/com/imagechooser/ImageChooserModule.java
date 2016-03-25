@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -51,20 +52,22 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
         }
     }
 
+    private void rejectPromise(Exception reason) {
+        if (mPickerPromise != null) {
+            mPickerPromise.reject(reason);
+            mPickerPromise = null;
+        }
+    }
+
+    @Nullable
     private String getPathFromUri(Uri contentUri) {
         if (contentUri.getScheme().equals("file")) {
             return contentUri.getPath();
         }
 
-        Activity currentActivity = getCurrentActivity();
-
-        if (currentActivity == null) {
-            return null;
-        }
-
         String[] projection = {MediaStore.Images.Media.DATA};
 
-        CursorLoader loader = new CursorLoader(currentActivity, contentUri, projection, null, null, null);
+        CursorLoader loader = new CursorLoader(getReactApplicationContext(), contentUri, projection, null, null, null);
         Cursor cursor = loader.loadInBackground();
 
         try {
@@ -85,15 +88,9 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
             return contentUri.getLastPathSegment();
         }
 
-        Activity currentActivity = getCurrentActivity();
-
-        if (currentActivity == null) {
-            return null;
-        }
-
         String[] projection = {MediaStore.MediaColumns.DISPLAY_NAME};
 
-        Cursor metaCursor = currentActivity.getContentResolver().query(contentUri, projection, null, null, null);
+        Cursor metaCursor = getReactApplicationContext().getContentResolver().query(contentUri, projection, null, null, null);
 
         if (metaCursor != null) {
             try {
@@ -113,13 +110,7 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
             return new File(contentUri.getPath()).length();
         }
 
-        Activity currentActivity = getCurrentActivity();
-
-        if (currentActivity == null) {
-            return 0;
-        }
-
-        Cursor cursor = currentActivity.getContentResolver().query(contentUri, null, null, null, null);
+        Cursor cursor = getReactApplicationContext().getContentResolver().query(contentUri, null, null, null, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -132,6 +123,35 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
         }
 
         return 0;
+    }
+
+    @Nullable
+    private WritableMap getImageData(@Nullable  Uri uri) {
+        if (uri == null) {
+            return null;
+        }
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+
+        options.inJustDecodeBounds = true;
+
+        String path = getPathFromUri(uri);
+
+        if (path != null) {
+            BitmapFactory.decodeFile(path, options);
+
+            WritableMap map = Arguments.createMap();
+
+            map.putInt("height", options.outHeight);
+            map.putInt("width", options.outWidth);
+            map.putDouble("size", getSizeFromUri(uri));
+            map.putString("name", getNameFromUri(uri));
+            map.putString("uri", uri.toString());
+
+            return map;
+        } else {
+            return null;
+        }
     }
 
     @ReactMethod
@@ -166,34 +186,15 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
                 } else if (resultCode == Activity.RESULT_OK) {
                     try {
                         Uri uri = intent.getData();
+                        WritableMap map = getImageData(uri);
 
-                        if (uri != null) {
-                            BitmapFactory.Options options = new BitmapFactory.Options();
-
-                            options.inJustDecodeBounds = true;
-
-                            String path = getPathFromUri(uri);
-
-                            if (path != null) {
-                                BitmapFactory.decodeFile(path, options);
-
-                                WritableMap map = Arguments.createMap();
-
-                                map.putInt("height", options.outHeight);
-                                map.putInt("width", options.outWidth);
-                                map.putDouble("size", getSizeFromUri(uri));
-                                map.putString("name", getNameFromUri(uri));
-                                map.putString("uri", uri.toString());
-
-                                resolvePromise(map);
-                            } else {
-                                rejectPromise("Failed resolve image path");
-                            }
+                        if (map != null) {
+                            resolvePromise(map);
                         } else {
-                            rejectPromise("Failed to pick image");
+                            rejectPromise("Failed to pick image: " + uri);
                         }
                     } catch (Exception e) {
-                        rejectPromise(e.getMessage());
+                        rejectPromise(e);
                     }
                 }
             }

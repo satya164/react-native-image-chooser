@@ -1,6 +1,7 @@
 {
   "name": "react-native-image-chooser",
   "version": "1.0.1",
+  "main": "src/ImageChooser.js",
   "author": {
     "email": "satyajit.happy@gmail.com",
     "name": "Satyajit Sahoo"
