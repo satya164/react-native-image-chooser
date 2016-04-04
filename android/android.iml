@@ -12,15 +12,13 @@
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
         <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
         <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
-        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugAndroidTest" />
-        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugAndroidTestSources" />
         <afterSyncTasks>
-          <task>generateDebugAndroidTestSources</task>
           <task>generateDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
         <option name="LIBRARY_PROJECT" value="true" />
       </configuration>
@@ -28,6 +26,7 @@
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$USER_HOME$/.gradle-build/android/android/intermediates/classes/debug" />
+    <output-test url="file://$USER_HOME$/.gradle-build/android/android/intermediates/classes/test/debug" />
     <exclude-output />
     <content url="file://$USER_HOME$/.gradle-build/android/android">
       <sourceFolder url="file://$USER_HOME$/.gradle-build/android/android/generated/source/r/debug" isTestSource="false" generated="true" />
@@ -55,10 +54,11 @@
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.fresco/fresco/0.8.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp/0.8.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.8.1/jars" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.react/react-native/0.16.1/jars" />
+      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.react/react-native/0.20.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/incremental" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/lint" />
+      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/mockable-android-23.jar" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/res" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/rs" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/symbols" />
@@ -73,6 +73,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -87,6 +94,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -94,10 +108,10 @@
     <orderEntry type="library" exported="" name="imagepipeline-okhttp-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="imagepipeline-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="react-native-0.16.1" level="project" />
     <orderEntry type="library" exported="" name="stetho-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-2.2.3" level="project" />
+    <orderEntry type="library" exported="" name="react-native-0.20.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />

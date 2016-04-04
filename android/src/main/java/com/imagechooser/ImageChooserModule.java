@@ -24,6 +24,8 @@ import java.io.File;
 public class ImageChooserModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private static final int PICK_IMAGE = 3500;
+    private static final String ERR_PICKER_CANCELLED = "ERR_PICKER_CANCELLED";
+    private static final String ERR_FAILED_TO_PICK = "ERR_FAILED_TO_PICK";
 
     private Promise mPickerPromise;
 
@@ -45,9 +47,9 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
         }
     }
 
-    private void rejectPromise(String reason) {
+    private void rejectPromise(String code, String reason) {
         if (mPickerPromise != null) {
-            mPickerPromise.reject(reason);
+            mPickerPromise.reject(code, reason);
             mPickerPromise = null;
         }
     }
@@ -174,7 +176,7 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
 
             currentActivity.startActivityForResult(chooserIntent, PICK_IMAGE);
         } catch (Exception e) {
-            promise.reject(e.getMessage());
+            promise.reject(e);
         }
     }
 
@@ -182,7 +184,7 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
         if (requestCode == PICK_IMAGE) {
             if (mPickerPromise != null) {
                 if (resultCode == Activity.RESULT_CANCELED) {
-                    rejectPromise("Image picker was cancelled");
+                    rejectPromise(ERR_PICKER_CANCELLED, "Image picker was cancelled");
                 } else if (resultCode == Activity.RESULT_OK) {
                     try {
                         Uri uri = intent.getData();
@@ -191,7 +193,7 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
                         if (map != null) {
                             resolvePromise(map);
                         } else {
-                            rejectPromise("Failed to pick image: " + uri);
+                            rejectPromise(ERR_FAILED_TO_PICK, "Failed to pick image: " + uri);
                         }
                     } catch (Exception e) {
                         rejectPromise(e);
