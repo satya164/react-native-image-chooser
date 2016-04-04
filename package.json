@@ -21,5 +21,9 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/satya164/react-native-image-chooser.git"
+  },
+  "devDependencies": {
+    "react": "^0.14.8",
+    "react-native": "^0.22.2"
   }
 }
