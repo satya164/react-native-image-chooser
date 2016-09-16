@@ -41,11 +41,6 @@
       <sourceFolder url="file://$USER_HOME$/.gradle-build/android/android/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$USER_HOME$/.gradle-build/android/android/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$USER_HOME$/.gradle-build/android/android/generated/res/resValues/androidTest/debug" type="java-test-resource" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/annotations" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/assets" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/bundles" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/classes" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/dependency-cache" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars" />
@@ -56,12 +51,6 @@
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.8.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/com.facebook.react/react-native/0.20.1/jars" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jars" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/incremental" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/lint" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/mockable-android-23.jar" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/res" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/rs" />
-      <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/intermediates/symbols" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/outputs" />
       <excludeFolder url="file://$USER_HOME$/.gradle-build/android/android/tmp" />
     </content>
@@ -108,8 +97,8 @@
     <orderEntry type="library" exported="" name="imagepipeline-okhttp-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="imagepipeline-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="stetho-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
+    <orderEntry type="library" exported="" name="stetho-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-2.2.3" level="project" />
     <orderEntry type="library" exported="" name="react-native-0.20.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />

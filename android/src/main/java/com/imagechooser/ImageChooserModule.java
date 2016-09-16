@@ -180,7 +180,12 @@ public class ImageChooserModule extends ReactContextBaseJavaModule implements Ac
         }
     }
 
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+    @Override
+    public void onNewIntent(final Intent Intent) {
+    }
+
+    @Override
+    public void onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent intent) {
         if (requestCode == PICK_IMAGE) {
             if (mPickerPromise != null) {
                 if (resultCode == Activity.RESULT_CANCELED) {
