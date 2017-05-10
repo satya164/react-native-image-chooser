@@ -1,5 +1,7 @@
 # `react-native-image-chooser`
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/satya164/react-native-image-chooser.svg)](https://greenkeeper.io/)
+
 A React Native module to show system Image chooser. Currently only supports Android.
 
 ### Installation
